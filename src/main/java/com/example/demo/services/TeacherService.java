@@ -41,6 +41,23 @@ public class TeacherService {
 			return new ResponseModel(false, ex.toString());
 		}
 	}
+	
+public ResponseModel deleteTeacher (int Id) {
+		
+		try {
+			
+			if(!existTeacher(Id)) {
+				return new ResponseModel (false,"Docente no existe");
+			}else {
+				teacherRepository.deleteById(Id);
+				return new ResponseModel (true,"Docente eliminado");
+			}
+
+		}catch (Exception ex){
+			return new ResponseModel (false,ex.getMessage());
+		}
+
+	}
 
 	private boolean existTeacher(int Id) {
 		return teacherRepository.findById(Id).isEmpty() ? false : true ;	
