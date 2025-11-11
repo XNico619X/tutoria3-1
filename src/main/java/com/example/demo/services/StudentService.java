@@ -26,7 +26,7 @@ public class StudentService {
 	public ResponseModel update (StudentModel studentModel) {
 		try {
 			// validar si el estudiante existe	 
-			if(!existeEstudiante(studentModel.getId())) {
+			if(!existStudent(studentModel.getId())) {
 				return new ResponseModel(false, "Estudiante no existe");
 					}else {
 				// como el estudiante existe, entonces vamos a actualizar
@@ -43,7 +43,7 @@ public class StudentService {
 		
 		try {
 			
-			if(!existeEstudiante(Id)) {
+			if(!existStudent(Id)) {
 				return new ResponseModel (false,"Estudiante no existe");
 			}else {
 				studentRepository.deleteById(Id);
@@ -56,7 +56,7 @@ public class StudentService {
 
 	}
 	
-	private boolean existeEstudiante(int Id) {
+	private boolean existStudent(int Id) {
 		return studentRepository.findById(Id).isEmpty() ? false : true ;	
 		
 	}

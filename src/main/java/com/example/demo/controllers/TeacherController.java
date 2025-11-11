@@ -5,11 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.models.TeacherModel;
+import com.example.demo.models.response.ResponseModel;
 import com.example.demo.services.TeacherService;
 
 @RestController
@@ -30,5 +32,11 @@ public class TeacherController {
 	       save(@RequestBody TeacherModel teacherModel){
 		return ResponseEntity.ok(teacherService.save(teacherModel));
 	}
+	
+	@PutMapping
+	public ResponseEntity<ResponseModel> 
+    	update(@RequestBody TeacherModel teacherModel){
+	return ResponseEntity.ok(teacherService.update(teacherModel));
+}
 
 }
