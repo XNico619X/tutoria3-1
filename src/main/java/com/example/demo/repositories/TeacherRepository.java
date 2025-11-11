@@ -1,9 +1,13 @@
 package com.example.demo.repositories;
 
+import java.util.Optional;
+
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import com.example.demo.models.TeacherModel;
 
-public interface TeacherRepository extends CrudRepository<TeacherModel, Integer>{
+@Repository
+public interface TeacherRepository extends CrudRepository<TeacherModel, Integer> {
 
 }

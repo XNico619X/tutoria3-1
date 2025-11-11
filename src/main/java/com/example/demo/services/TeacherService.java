@@ -15,10 +15,26 @@ public class TeacherService {
 	@Autowired
 	TeacherRepository teacherRepository;
 	
-	public TeacherModel save(TeacherModel teacherModel){
-	    return teacherRepository.save(teacherModel);
-	
-	
+	public ResponseModel save(TeacherModel teacherModel) {
+	    try {
+	        List<TeacherModel> docentes = (List<TeacherModel>) teacherRepository.findAll();
+
+	        boolean existeDuplicado = docentes.stream().anyMatch(d ->
+	        d.getDocumentNumber() == teacherModel.getDocumentNumber()||
+	        d.getDocumentTypeId() == teacherModel.getDocumentTypeId() 
+	            
+	        );
+
+	        if (existeDuplicado) {
+	            return new ResponseModel(false, "Ya existe un docente con el mismo documento o cédula");
+	        }
+
+	        teacherRepository.save(teacherModel);
+	        return new ResponseModel(true, "Docente guardado correctamente");
+
+	    } catch (Exception ex) {
+	        return new ResponseModel(false, ex.getMessage());
+	    }
 	}
 	
 	public List<TeacherModel> getAll(){
